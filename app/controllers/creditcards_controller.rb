@@ -17,6 +17,8 @@ class CreditcardsController < ApplicationController
 
   def create
     creditcard = Creditcard.new(creditcard_params)
+    creditcard.limit = 1000
+    creditcard.apr = 0.35
     if creditcard.save
       redirect_to creditcard_path(creditcard)
     else

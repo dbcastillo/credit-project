@@ -1,7 +1,15 @@
-<h1>List of credit card users</h1>
+<h1>Welcome to the credit card machine!</h1>
+<br/>
+<h2>User List:</h2>
+
+<% if @creditcards.count == 0 %>
+  There are no users yet. Open a new credit card and be the first!
+  <br/>
+  <br/>
+<% end %>
 
 <% @creditcards.each do |creditcard| %>
   <li><%= link_to creditcard.username, creditcard_path(creditcard) %></li>
 <% end %>
 
-<%= link_to "Create new credit card", new_creditcard_path %>
+<%= link_to "Open new credit card", new_creditcard_path %>
