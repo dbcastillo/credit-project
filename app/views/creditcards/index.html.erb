@@ -1,3 +1,7 @@
+<h1>List of credit card users</h1>
+
 <% @creditcards.each do |creditcard| %>
-  <li><%= creditcard.username =%></li>
+  <li><%= link_to creditcard.username, creditcard_path(creditcard) %></li>
 <% end %>
+
+<%= link_to "Create new credit card", new_creditcard_path %>
