@@ -7,6 +7,7 @@ class CreditcardsController < ApplicationController
 
   def show
     @creditcard = Creditcard.find(params[:id])
+    @creditcards = Creditcard.all
     render :show
   end
 
