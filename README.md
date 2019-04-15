@@ -1,24 +1,36 @@
-# README
+# Credit Project
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Credit Project App tracks credit card activity including accruing interest
 
-Things you may want to cover:
+## Application Features
 
-* Ruby version
+* Create an account (e.g. opening a new credit card)
+* Keep track of charges (e.g. card swipes)
+* Keep track of payments
+* Provide the total outstanding balance as of any given day
 
-* System dependencies
+## Built With
 
-* Configuration
+* Ruby
+* Rails
+* SQLite Database using ActiveRecord
 
-* Database creation
+## Server-Side Install Instructions
 
-* Database initialization
+1. Clone Repo
+2. Run ```bundle install```
+3. Run ```rake db:create```
+4. Run ```rake db:migrate```
+5. Run ```rails s```
 
-* How to run the test suite
+## Contributing
 
-* Services (job queues, cache servers, search engines, etc.)
+[CONTRIBUTING.md](https://gist.github.com/dbcastillo/75308bee09c36e8e8aedd58a6de0e37f)
 
-* Deployment instructions
+## Author
 
-* ...
+**Derick Castillo**
+
+## License
+
+[LICENSE.md](LICENSE.md)
