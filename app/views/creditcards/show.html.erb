@@ -2,6 +2,15 @@
 <p>Credit Limit: <%= @creditcard.limit %></p>
 <p>Credit APR (decimal form): <%= @creditcard.apr %></p>
 
-<%= link_to "Make a charge", edit_creditcard_path(@creditcard) %>
+<p>Charge History: </p>
+<ol>
+  <% @creditcard.charges.each do |charge| %>
+    <li> -- $<%= charge.amount %></li>
+  <% end %>
+</ol>
+
+<%= link_to "Make a charge", new_creditcard_charge_path(@creditcard) %>
 <br/>
 <%= link_to "Make a payment", edit_creditcard_path(@creditcard) %>
+<br/>
+<%= link_to "Home", "/creditcards" %>

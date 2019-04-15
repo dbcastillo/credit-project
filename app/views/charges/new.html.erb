@@ -1,0 +1,6 @@
+<%= form_for @charge, :url => {:action => "create"} do |form_helper| %>
+  <%= form_helper.label :amount %>
+  <%= form_helper.text_field :amount %>
+  <br/>
+  <%= form_helper.submit %>
+<% end %>
