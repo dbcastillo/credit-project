@@ -6,7 +6,7 @@
 </p>
 <p>Outstanding Balance: $<%= @creditcard.charges.map(&:amount).reduce(0,:+) - @creditcard.payments.map(&:amount).reduce(0,:+) %></p>
 <p>Estimated Balance 30 days after opening date (outstanding balance + accrued interest...assuming no further transactions are made):
-  <% if @creditcard.charges.map(&:amount).reduce(0,:+) - @creditcard.payments.map(&:amount).reduce(0,:+) <= 0%>
+  <% if @creditcard.charges.map(&:amount).reduce(0,:+) - @creditcard.payments.map(&:amount).reduce(0,:+) <= 0 %>
     $0
   <% else %>
     <% @creditcard.charges.each do |charge| %>
@@ -23,8 +23,14 @@
 <ol>
   <% @creditcard.charges.each do |charge| %>
   <% time = Time.new %>
-    <li><span> -- Amount: $<%= charge.amount %></span>
-    <span> -- Date: <%= charge.created_at.strftime("%a %b %e %r") %></span></li>
+    <li>
+      <span>
+        -- Amount: $<%= charge.amount %>
+      </span>
+      <span>
+        -- Date: <%= charge.created_at.strftime("%a %b %e %r") %>
+      </span>
+    </li>
     <% charge.outstandingbalance += charge.amount %>
   <% end %>
 </ol>
