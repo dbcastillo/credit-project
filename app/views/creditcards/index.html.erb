@@ -11,5 +11,5 @@
 <% @creditcards.each do |creditcard| %>
   <li><%= link_to creditcard.username, creditcard_path(creditcard) %></li>
 <% end %>
-
+<br/>
 <%= link_to "Open new credit card", new_creditcard_path %>
