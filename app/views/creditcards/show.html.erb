@@ -4,6 +4,20 @@
 <p><% time = Time.new %>
   <span>Opening Date: <%= @creditcard.created_at.strftime("%a %b %e %r") %></span>
 </p>
+<p>Outstanding Balance: $<%= @creditcard.charges.map(&:amount).reduce(0,:+) - @creditcard.payments.map(&:amount).reduce(0,:+) %></p>
+<p>Estimated Balance 30 days after opening date (outstanding balance + accrued interest...assuming no further transactions are made):
+  <% if @creditcard.charges.map(&:amount).reduce(0,:+) - @creditcard.payments.map(&:amount).reduce(0,:+) <= 0%>
+    $0
+  <% else %>
+    <% @creditcard.charges.each do |charge| %>
+    <% time = Time.new %>
+    <% outstanding_balance = @creditcard.charges.map(&:amount).reduce(0,:+) - @creditcard.payments.map(&:amount).reduce(0,:+) %>
+    <% updated_apr = charge.creditcard.apr/365 %>
+    <% estimated_time = (30 - ((charge.created_at.strftime("%e").to_i) - (@creditcard.created_at.strftime("%e").to_i)))  %>
+    $<%= outstanding_balance + (outstanding_balance * updated_apr * estimated_time).round(2)%>
+    <% end %>
+  <% end %>
+</p>
 
 <p>Charge History: </p>
 <ol>
@@ -14,10 +28,17 @@
     <% charge.outstandingbalance += charge.amount %>
   <% end %>
 </ol>
-<p>Oustanding Balance: $<%= @creditcard.charges.map(&:amount).reduce(:+) %></p>
+<p>Payment History: </p>
+<ol>
+  <% @creditcard.payments.each do |payment| %>
+  <% time = Time.new %>
+    <li><span> -- Amount: $<%= payment.amount %></span>
+    <span> -- Date: <%= payment.created_at.strftime("%a %b %e %r") %></span></li>
+  <% end %>
+</ol>
 
 <%= link_to "Make a charge", new_creditcard_charge_path(@creditcard) %>
 <br/>
-<%= link_to "Make a payment", edit_creditcard_path(@creditcard) %>
+<%= link_to "Make a payment", new_creditcard_payment_path(@creditcard) %>
 <br/>
 <%= link_to "Home", "/creditcards" %>

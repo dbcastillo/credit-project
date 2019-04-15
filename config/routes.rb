@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   resources :creditcards do
     resources :charges
+    resources :payments
   end
 
   # get '/creditcards/new', to: 'creditcards#new'
