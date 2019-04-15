@@ -1,13 +1,16 @@
 <h1>Name: <%= @creditcard.username %></h1>
 <p>Credit Limit: <%= @creditcard.limit %></p>
 <p>Credit APR (decimal form): <%= @creditcard.apr %></p>
+<p><% time = Time.new %>
+  <span>Opening Date: <%= @creditcard.created_at.strftime("%a %b %e %r") %></span>
+</p>
 
 <p>Charge History: </p>
 <ol>
   <% @creditcard.charges.each do |charge| %>
   <% time = Time.new %>
-    <li><span> -- Amount: $<%= charge.amount%></span>
-    <span> -- Date: <%= charge.created_at.strftime("%a %b #{time.day.ordinalize}")%></span></li>
+    <li><span> -- Amount: $<%= charge.amount %></span>
+    <span> -- Date: <%= charge.created_at.strftime("%a %b %e %r") %></span></li>
     <% charge.outstandingbalance += charge.amount %>
   <% end %>
 </ol>
