@@ -5,9 +5,13 @@
 <p>Charge History: </p>
 <ol>
   <% @creditcard.charges.each do |charge| %>
-    <li> -- $<%= charge.amount %></li>
+  <% time = Time.new %>
+    <li><span> -- Amount: $<%= charge.amount%></span>
+    <span> -- Date: <%= charge.created_at.strftime("%a %b #{time.day.ordinalize}")%></span></li>
+    <% charge.outstandingbalance += charge.amount %>
   <% end %>
 </ol>
+<p>Oustanding Balance: $<%= @creditcard.charges.map(&:amount).reduce(:+) %></p>
 
 <%= link_to "Make a charge", new_creditcard_charge_path(@creditcard) %>
 <br/>

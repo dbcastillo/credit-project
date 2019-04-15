@@ -6,6 +6,7 @@ class ChargesController < ApplicationController
 
   def create
     charge = Charge.new(charge_params)
+    charge.outstandingbalance = 0
     creditcard = Creditcard.find_by(id: params[:creditcard_id])
 
     charge.creditcard = creditcard
@@ -20,6 +21,6 @@ class ChargesController < ApplicationController
   private
 
   def charge_params
-    params.require(:charge).permit(:amount)
+    params.require(:charge).permit(:amount, :outstandingbalance)
   end
 end

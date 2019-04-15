@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_14_234331) do
+ActiveRecord::Schema.define(version: 2019_04_15_023556) do
 
   create_table "charges", force: :cascade do |t|
     t.integer "amount"
     t.integer "creditcard_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "outstandingbalance"
   end
 
   create_table "creditcards", force: :cascade do |t|
